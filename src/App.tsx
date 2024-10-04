@@ -2,6 +2,7 @@ import {
   faLinkedin,
   faThreads,
   faTwitter,
+  IconDefinition,
 } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -20,10 +21,10 @@ import Grid from '@mui/material/Grid2'
 import { useCallback, useEffect, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useForm } from 'react-hook-form'
-
+import defaultText from './test/dive'
 //
 export const chunking = (text: string, chunkSize: number): string[] => {
-  const words = text.split(/(\s+)/) // \s+ will capture spaces and line breaks like '\n'
+  const words = text.split(/(\s+)/)
 
   const chunks = []
   let currentChunk = ''
@@ -114,8 +115,7 @@ function App() {
   const [target, setTarget] = useState<string>('threads')
   const {
     register,
-
-    formState: { errors },
+    formState: {},
   } = useForm<Inputs>()
 
   type Inputs = {
@@ -128,6 +128,11 @@ function App() {
     linkedin: 1000,
     twitter: 280,
   }
+  const targetIcons: { [key: string]: IconDefinition } = {
+    threads: faThreads,
+    twitter: faTwitter,
+    linkedin: faLinkedin,
+  }
   console.log({ target: target, chunkSize: postCountLimits[target] })
   return (
     <>
@@ -136,18 +141,18 @@ function App() {
         disableGutters={true}
         sx={{
           display: 'flex',
-          minHeight: '100vh',
+          height: '100vh',
         }}
       >
-        <Box>
-          <Grid minHeight="100%" container spacing={2}>
-            <Grid size={6} className="leftCol">
+        <Box sx={{ width: '100%' }}>
+          <Grid container spacing={2} sx={{ height: '100%' }}>
+            <Grid size={6} className="leftCol" sx={{ height: '100%' }}>
               <Grid>
                 <Box sx={{ padding: 1 }}>
                   <Typography variant="h4">Longform</Typography>
                 </Box>
               </Grid>
-              <Grid>
+              <Grid sx={{ overflowY: 'auto', height: '80%' }}>
                 <Box
                   component="form"
                   sx={{
@@ -160,7 +165,7 @@ function App() {
                   <TextField
                     id="outlined-multiline-static"
                     label="Longform Text"
-                    defaultValue={''}
+                    defaultValue={defaultText}
                     multiline
                     variant="outlined"
                     fullWidth
@@ -172,56 +177,61 @@ function App() {
                 </Box>
               </Grid>
             </Grid>
-            <Grid size={6} className="rightCol">
-              <Grid>
-                <Box sx={{ padding: 1 }}>
-                  <Typography variant="h4">Thread ( {target} )</Typography>
-                </Box>
+            <Grid size={6} className="rightCol" sx={{ height: '100%' }}>
+              <Grid container spacing={2}>
+                <Grid size="grow">
+                  <Box sx={{ padding: 1 }}>
+                    <Typography variant="h4">
+                      <FontAwesomeIcon icon={targetIcons[target]} /> Threads
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid>
+                  <Box sx={{ padding: 1 }}>
+                    <ButtonGroup>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{
+                          padding: '6px',
+                          minWidth: '40px',
+                          minHeight: '40px',
+                        }}
+                        onClick={() => setTarget('threads')}
+                      >
+                        <FontAwesomeIcon icon={faThreads} />
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{
+                          padding: '6px',
+                          minWidth: '40px',
+                          minHeight: '40px',
+                        }}
+                        onClick={() => setTarget('twitter')}
+                      >
+                        <FontAwesomeIcon icon={faTwitter} />
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{
+                          padding: '6px',
+                          minWidth: '40px',
+                          minHeight: '40px',
+                        }}
+                        onClick={() => setTarget('linkedin')}
+                      >
+                        <FontAwesomeIcon icon={faLinkedin} />
+                      </Button>
+                    </ButtonGroup>
+                  </Box>
+                </Grid>
               </Grid>
-              <Grid>
-                <Box sx={{ padding: 1 }}>
-                  <ButtonGroup>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      sx={{
-                        padding: '6px',
-                        minWidth: '40px',
-                        minHeight: '40px',
-                      }}
-                      onClick={() => setTarget('threads')}
-                    >
-                      <FontAwesomeIcon icon={faThreads} />
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      sx={{
-                        padding: '6px',
-                        minWidth: '40px',
-                        minHeight: '40px',
-                      }}
-                      onClick={() => setTarget('twitter')}
-                    >
-                      <FontAwesomeIcon icon={faTwitter} />
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      sx={{
-                        padding: '6px',
-                        minWidth: '40px',
-                        minHeight: '40px',
-                      }}
-                      onClick={() => setTarget('linkedin')}
-                    >
-                      <FontAwesomeIcon icon={faLinkedin} />
-                    </Button>
-                  </ButtonGroup>
-                </Box>
-              </Grid>
-              <Grid>
-                <Box sx={{ overflowY: 'scroll' }}>
+
+              <Grid sx={{ overflowY: 'auto', height: '80%' }}>
+                <Box>
                   <Threads
                     longFormText={longFormText}
                     chunkSize={postCountLimits[target]}
