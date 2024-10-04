@@ -139,69 +139,95 @@ function App() {
           minHeight: '100vh',
         }}
       >
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid minHeight="100%" container spacing={2} sx={{}}>
+        <Box>
+          <Grid minHeight="100%" container spacing={2}>
             <Grid size={6} className="leftCol">
-              <Typography variant="h4">Longform</Typography>
-              <Box
-                component="form"
-                sx={{
-                  flexDirection: 'column',
-                  display: 'flex',
-                  height: '100%',
-                }}
-              >
-                <TextField
-                  id="outlined-multiline-static"
-                  label="Longform Text"
-                  defaultValue={''}
-                  multiline
-                  // rows={4}
-                  variant="outlined"
-                  fullWidth
-                  {...register('longform')}
-                  onChange={(e) => {
-                    setLongFormText(e.target.value)
+              <Grid>
+                <Box sx={{ padding: 1 }}>
+                  <Typography variant="h4">Longform</Typography>
+                </Box>
+              </Grid>
+              <Grid>
+                <Box
+                  component="form"
+                  sx={{
+                    padding: 1,
+                    flexDirection: 'column',
+                    display: 'flex',
+                    height: '100%',
                   }}
-                />
-
-                {errors.longform && <span>This field is required</span>}
-              </Box>
+                >
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Longform Text"
+                    defaultValue={''}
+                    multiline
+                    variant="outlined"
+                    fullWidth
+                    {...register('longform')}
+                    onChange={(e) => {
+                      setLongFormText(e.target.value)
+                    }}
+                  />
+                </Box>
+              </Grid>
             </Grid>
             <Grid size={6} className="rightCol">
-              <Typography variant="h4">Thread ( {target} )</Typography>
-              <Box>
-                <ButtonGroup>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{ padding: '6px', minWidth: '40px', minHeight: '40px' }}
-                    onClick={() => setTarget('threads')}
-                  >
-                    <FontAwesomeIcon icon={faThreads} />
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{ padding: '6px', minWidth: '40px', minHeight: '40px' }}
-                    onClick={() => setTarget('twitter')}
-                  >
-                    <FontAwesomeIcon icon={faTwitter} />
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{ padding: '6px', minWidth: '40px', minHeight: '40px' }}
-                    onClick={() => setTarget('linkedin')}
-                  >
-                    <FontAwesomeIcon icon={faLinkedin} />
-                  </Button>
-                </ButtonGroup>
-              </Box>
-              <Threads
-                longFormText={longFormText}
-                chunkSize={postCountLimits[target]}
-              />
+              <Grid>
+                <Box sx={{ padding: 1 }}>
+                  <Typography variant="h4">Thread ( {target} )</Typography>
+                </Box>
+              </Grid>
+              <Grid>
+                <Box sx={{ padding: 1 }}>
+                  <ButtonGroup>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{
+                        padding: '6px',
+                        minWidth: '40px',
+                        minHeight: '40px',
+                      }}
+                      onClick={() => setTarget('threads')}
+                    >
+                      <FontAwesomeIcon icon={faThreads} />
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{
+                        padding: '6px',
+                        minWidth: '40px',
+                        minHeight: '40px',
+                      }}
+                      onClick={() => setTarget('twitter')}
+                    >
+                      <FontAwesomeIcon icon={faTwitter} />
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{
+                        padding: '6px',
+                        minWidth: '40px',
+                        minHeight: '40px',
+                      }}
+                      onClick={() => setTarget('linkedin')}
+                    >
+                      <FontAwesomeIcon icon={faLinkedin} />
+                    </Button>
+                  </ButtonGroup>
+                </Box>
+              </Grid>
+              <Grid>
+                <Box sx={{ overflowY: 'scroll' }}>
+                  <Threads
+                    longFormText={longFormText}
+                    chunkSize={postCountLimits[target]}
+                  />
+                </Box>
+              </Grid>
             </Grid>
           </Grid>
         </Box>
