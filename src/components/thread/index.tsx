@@ -67,7 +67,7 @@ const Posts = (params: PostsProps) => {
         [`a${index}`]: !prevState[`a${index}`],
       }))
     })
-  }, [longFormText])
+  }, [longFormText, target])
 
   const toggle = (index: number) => {
     setToggle((prevState) => ({
