@@ -1,7 +1,8 @@
 import {
   faLinkedin,
+  faSquareXTwitter,
   faThreads,
-  faTwitter,
+  faXTwitter,
   IconDefinition,
 } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -22,7 +23,8 @@ import PostCard from '../post-card'
 
 const targetIcons: { [key: string]: IconDefinition } = {
   threads: faThreads,
-  twitter: faTwitter,
+  twitter: faXTwitter,
+  twitterPro: faSquareXTwitter,
   linkedin: faLinkedin,
 }
 
@@ -30,6 +32,7 @@ const chunkSizes: { [key: string]: number } = {
   threads: 500,
   linkedin: 5000,
   twitter: 280,
+  twitterPro: 25000,
 }
 
 const continuationMarkers: { [key: number]: string } = {
@@ -148,7 +151,7 @@ const Posts = (params: PostsProps) => {
   }
 
   return (
-    <Grid size={6} className="rightCol" sx={{ height: '100%' }}>
+    <Grid size={{ xs: 12, md: 6 }} className="rightCol" sx={{ height: '100%' }}>
       <Grid container spacing={2}>
         <Grid size={6}>
           <Box sx={{ padding: 1 }}>
@@ -182,7 +185,20 @@ const Posts = (params: PostsProps) => {
                 }}
                 onClick={() => setTarget('twitter')}
               >
-                <FontAwesomeIcon icon={faTwitter} />
+                <FontAwesomeIcon icon={faXTwitter} />
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  padding: '6px',
+                  minWidth: '40px',
+                  minHeight: '40px',
+                  backgroundColor: 'black',
+                }}
+                onClick={() => setTarget('twitterPro')}
+              >
+                <FontAwesomeIcon icon={faXTwitter} />
               </Button>
               <Button
                 variant="contained"

@@ -14,7 +14,7 @@ const LongForm = (params: LongFormProps) => {
   }
   const { longFormText = '', setLongFormText } = params
   return (
-    <Grid size={6} className="longform" sx={{ height: '100%' }}>
+    <Grid size={{ xs: 12, md: 6 }} className="longform" sx={{ height: '100%' }}>
       <Grid>
         <Box sx={{ padding: 1 }}>
           <Typography variant="h4">Longform</Typography>
