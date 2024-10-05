@@ -20,11 +20,11 @@ const LongForm = (params: LongFormProps) => {
           <Typography variant="h4">Longform</Typography>
         </Box>
       </Grid>
-      <Grid sx={{ overflowY: 'auto', height: '80%' }}>
+      <Grid sx={{ overflowY: 'auto', height: '80%', paddingTop: 1 }}>
         <Box
           component="form"
           sx={{
-            padding: 1,
+            padding: 0,
             flexDirection: 'column',
             display: 'flex',
             height: '100%',

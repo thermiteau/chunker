@@ -16,7 +16,10 @@ const PostCard = (params: PostCardProps) => {
       <CardContent className="post_container">
         <CopyToClipboard text={chunk}>
           <Typography
-            sx={{ color: toggleState[`a${index}`] ? '#B2B2B2' : '#000000' }}
+            sx={{
+              whiteSpace: 'pre-wrap',
+              color: toggleState[`a${index}`] ? '#B2B2B2' : '#000000',
+            }}
             onMouseDown={() => toggle(index)}
             // onMouseUp={() => toggle(index)}
           >
